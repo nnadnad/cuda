@@ -16,8 +16,7 @@
  * @param n number of vertices in the graph
  * @return         index of minimum distance not yet included in spt_set
  */
-__device__
-int min_distance_idx(long *dist, bool spt_set[], int n) {
+__device__ int min_distance_idx(long *dist, bool spt_set[], int n) {
 	// Initialize min value 
     int min = INT_MAX, min_index; 
     for (int i = 0; i < n; i++) {
@@ -34,8 +33,7 @@ int min_distance_idx(long *dist, bool spt_set[], int n) {
  * @param  n number of vertices
  * @param matriks matriks untuk isi hasil random angka
  */
-__host__
-void randMatriks(int *matriks, int n) {
+__host__ void randMatriks(int *matriks, int n) {
     srand(13517074);
 
     // isi matriks dengan bilangan random
@@ -50,8 +48,7 @@ void randMatriks(int *matriks, int n) {
     }
 }
 
-__host__
-void PrintMatriks(int *matriks, int n) {
+__host__ void PrintMatriks(int *matriks, int n) {
     for (int i = 0; i < n; i++) {
         for (int j = 0; j < n; j++) {
             printf("%d\t", matriks[i*n + j]);
@@ -60,8 +57,7 @@ void PrintMatriks(int *matriks, int n) {
     }
 }
 
-__device__
-int dijkstra(int* graph, int src, int n) {
+__device__ int dijkstra(int* graph, int src, int n) {
     // output array, contains shortest distance form src to every vertices
     int *dist = (int*)malloc(n*sizeof(int));
     
