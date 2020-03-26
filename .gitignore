@@ -1,0 +1,6 @@
+# outputs
+output*
+
+#binaries
+bin/*
+
