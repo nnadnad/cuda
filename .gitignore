@@ -4,3 +4,6 @@ output*
 #binaries
 bin/*
 
+# scripts
+conn
+push
