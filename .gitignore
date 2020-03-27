@@ -5,5 +5,4 @@ output*
 bin/*
 
 # scripts
-conn.sh
-push.sh
+*.sh
