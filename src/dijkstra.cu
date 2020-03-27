@@ -1,13 +1,4 @@
-#include <stdio.h>
-#include <time.h>
-#include <stdlib.h>
-#include <math.h>
-#include <limits.h>
-
-#include "boolean.h"
-
-
-
+#include "header.h"
 /**
  * Get vertex index with minimum distance which not yet included
  * in spt_set
