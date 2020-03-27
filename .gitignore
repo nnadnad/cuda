@@ -5,5 +5,5 @@ output*
 bin/*
 
 # scripts
-conn
-push
+conn.sh
+push.sh
