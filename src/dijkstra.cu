@@ -107,4 +107,22 @@ __device__ int dijkstra(int* graph, int src, int n) {
     return result;
 }
 
+__global__ void solution(int *graph, int *result, int n) {
+    int src = blockDim.x * blockIdx.x + threadIdx.x;
+
+    if (src < n) {
+        // alokasi memori
+        int *matriks = (int*)malloc(n * sizeof(int));
+
+        //hitung dijkstra
+        matriks = dijkstra(graph, src, n);
+
+        // calculate
+        for (int i = 0; i < n; i++) {
+            result[src*n + i] = matriks[i];
+        }
+        free(matriks);
+    }
+}
+
 
