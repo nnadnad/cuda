@@ -107,8 +107,8 @@ int main(int argc, char *argv[]) {
   // Random matrix
   RandomMatrix(adj_matrix, nodes_count);
   
-  printf("~=== Awal  ===~\n");
-  PrintMatrix(adj_matrix, nodes_count);
+  // printf("~=== Awal  ===~\n");
+  // PrintMatrix(adj_matrix, nodes_count);
 
   // Copy data from host to device
   cudaMemcpy(dev_matrix, adj_matrix, size, cudaMemcpyHostToDevice);
@@ -130,8 +130,8 @@ int main(int argc, char *argv[]) {
   cudaEventElapsedTime(&milliseconds, start, stop);
 
   printf("\n");
-  printf("~=== Hasil ===~\n");
-  PrintMatrix(result_matrix, nodes_count);
+  // printf("~=== Hasil ===~\n");
+  // PrintMatrix(result_matrix, nodes_count);
   printf("\ntime: %f microsecond(s)\n", milliseconds*1000);
   
   // free host memory
