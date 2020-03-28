@@ -5,6 +5,9 @@
 #include <limits.h>
 
 #include "boolean.h"
+#define true 1
+#define false 0
+
 
 int min_distance_idx(long *dist, bool spt_set[], int n);
 void randMatriks(int *matriks, int n);

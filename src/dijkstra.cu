@@ -7,7 +7,8 @@
  * @param n number of vertices in the graph
  * @return         index of minimum distance not yet included in spt_set
  */
-__device__ int min_distance_idx(long *dist, bool spt_set[], int n) {
+__device__ 
+int min_distance_idx(int *dist, int *spt_set, int n) {
 	// Initialize min value 
     int min = INT_MAX, min_index; 
     for (int i = 0; i < n; i++) {
@@ -19,41 +20,14 @@ __device__ int min_distance_idx(long *dist, bool spt_set[], int n) {
     return min_index; 
 }
 
-/**
- * generate a graph with n vertices
- * @param  n number of vertices
- * @param matriks matriks untuk isi hasil random angka
- */
-__host__ void randMatriks(int *matriks, int n) {
-    srand(13517074);
-
-    // isi matriks dengan bilangan random
-    for (int i = 0; i < n; i++) {
-        for (int j = 0; j < n; j++) {
-            if (i == j) {
-                matriks[i*n + j] = 0;
-            } else {
-                matriks[i*n + j] = matriks[j*n + i] = rand()%100;
-            }
-        }
-    }
-}
-
-__host__ void PrintMatriks(int *matriks, int n) {
-    for (int i = 0; i < n; i++) {
-        for (int j = 0; j < n; j++) {
-            printf("%d\t", matriks[i*n + j]);
-            printf("\n");
-        }
-    }
-}
-
-__device__ int dijkstra(int* graph, int src, int n) {
+__device__ 
+int* dijkstra(int* graph, int src, int n) {
     // output array, contains shortest distance form src to every vertices
     int *dist = (int*)malloc(n*sizeof(int));
-    
+    int *spt_set = (int*)malloc(n*sizeof(int));
+
     // spt_set[i] is true if vertex i already included in the shortest path tree
-    bool  spt_set[n];
+    // bool spt_set[n];
     // int *spt_set = (int*)malloc(n*sizeof(int));
     
     // initialize dist and spt_set
@@ -98,12 +72,45 @@ __device__ int dijkstra(int* graph, int src, int n) {
     return result;
 }
 
-__global__ void solution(int *graph, int *result, int n) {
+/**
+ * generate a graph with n vertices
+ * @param  n number of vertices
+ * @param matriks matriks untuk isi hasil random angka
+ */
+__host__ 
+void randMatriks(int *matriks, int n) {
+    srand(13517074);
+
+    // isi matriks dengan bilangan random
+    for (int i = 0; i < n; i++) {
+        for (int j = 0; j < n; j++) {
+            if (i == j) {
+                matriks[i*n + j] = 0;
+            } else {
+                matriks[i*n + j] = matriks[j*n + i] = rand()%100;
+            }
+        }
+    }
+}
+
+__host__
+void PrintMatriks(int *matriks, int n) {
+    for (int i = 0; i < n; i++) {
+        for (int j = 0; j < n; j++) {
+            printf("%d\t", matriks[i*n + j]);
+        }
+        printf("\n");
+    }
+}
+
+
+__global__
+void solution(int* graph, int* result, int n) {
     int src = blockDim.x * blockIdx.x + threadIdx.x;
 
     if (src < n) {
         // alokasi memori
-        int *matriks = (int*)malloc(n * sizeof(int));
+        int* matriks = (int*)malloc(n * sizeof(int));
 
         //hitung dijkstra
         matriks = dijkstra(graph, src, n);
