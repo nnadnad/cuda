@@ -6,3 +6,7 @@ run : compile bin/main
 
 compile: src/main.cu
 	${NVCC} -G -o bin/main src/main.cu
+
+serial: ./src/serial.c ./src/dijkstra.* ./src/util.*
+	gcc ./src/serial.c ./src/dijkstra.c ./src/util.c -o ./bin/serial
+	./bin/serial $(n)
